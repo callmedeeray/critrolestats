@@ -27,7 +27,7 @@ nat1s = tree.xpath('//td[2]/ol//span/text()')
 nat20s[0] += nat20s[1]
 del nat20s[1]
 
-tbl = []
+#tbl = []
 for chk in nat20s:
     ep = re.findall(r'2-\d{2}', chk)
     try:
@@ -35,7 +35,7 @@ for chk in nat20s:
     except:
         dat = {"roll": "nat20", "episode": ep, "details": chk}
     scraperwiki.sqlite.save(unique_keys=['details'], data = dat)
-    tbl.append(dat)
+    #tbl.append(dat)
 
 for chk in nat1s: 
     ep = re.findall(r'2-\d{2}', chk)
@@ -44,7 +44,7 @@ for chk in nat1s:
     except:
         dat = {"roll": "nat1", "episode": 'unknown', "details": chk}
     scraperwiki.sqlite.save(unique_keys=['details'], data = dat)
-    tbl.append(dat)
+    # tbl.append(dat)
 
 
 #
