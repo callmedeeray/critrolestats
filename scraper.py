@@ -24,7 +24,7 @@ tree = html.fromstring(page.content)
 nat20s = tree.xpath('//td[1]/ol//span/text()')
 nat1s = tree.xpath('//td[2]/ol//span/text()')
 
-nat20s[0] = nat20s[0]+nat20s[1]
+nat20s[0] += nat20s[1]
 del nat20s[1]
 
 tbl = []
