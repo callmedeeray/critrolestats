@@ -39,7 +39,7 @@ for chk in nat1s:
     try:
         dat = {"roll": "nat1", "episode": ep[0], "details": chk}
     except:
-        dat = {"roll": "nat1", "episode": ep, "details": chk}
+        dat = {"roll": "nat1", "episode": 'unknown', "details": chk}
     scraperwiki.sqlite.save(unique_keys=['details'], data = dat)
     tbl.append(dat)
 
