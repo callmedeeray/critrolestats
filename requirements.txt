@@ -7,3 +7,4 @@
 
 lxml==4.3.2
 cssselect==0.9.1
+BeautifulSoup==4.4.0
