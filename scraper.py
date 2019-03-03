@@ -3,8 +3,14 @@
 
 import scraperwiki
 from lxml import html
-# import lxml.html
 import requests
+from lxml.html.soupparser import fromstring
+from lxml import etree
+from io import StringIO
+import re
+
+
+
 #
 # # Read in a page
 # html = scraperwiki.scrape("https://www.critrolestats.com/dmcrits-wm")  
@@ -12,10 +18,32 @@ import requests
 page = requests.get('https://docs.google.com/document/d/e/2PACX-1vS_MbMz0aCPYwVv2xYKRkpM1rqP2tolnIg7wk47Vacdb-HFdeW_Wh7ZJMyEI9M3V3FEHRjClgZCGP9c/pub?embedded=true')
 tree = html.fromstring(page.content)
 
-##nat20s = tree.xpath('/html/body/table/tbody/tr[2]/td[1]')
-##nat1s = tree.xpath('/html/body/table/tbody/tr[2]/td[2]')
-nat20s = tree.xpath('/html/body/table/tbody/tr[2]/td[1]/ol/li[1]/span[1]/text()')
-print nat20s
+##root = fromstring(page.content)
+##print [child.tag for child in root.iterdescendants()]
+
+nat20s = tree.xpath('//td[1]/ol//span/text()')
+nat1s = tree.xpath('//td[2]/ol//span/text()')
+
+tbl = []
+for chk in nat20s:
+    ep = re.findall(r'2-\d{2}', chk)
+    try:
+        dat = {"roll": "nat20", "episode": ep[0], "details": chk}
+    except:
+        dat = {"roll": "nat20", "episode": ep, "details": chk}
+    scraperwiki.sqlite.save(unique_keys=['details'], data = dat)
+    tbl.append(dat)
+
+for chk in nat1s: 
+    ep = re.findall(r'2-\d{2}', chk)
+    try:
+        dat = {"roll": "nat1", "episode": ep[0], "details": chk}
+    except:
+        dat = {"roll": "nat1", "episode": ep, "details": chk}
+    scraperwiki.sqlite.save(unique_keys=['details'], data = dat)
+    tbl.append(dat)
+
+
 #
 # # Find something on the page using css selectors
 # root = lxml.html.fromstring(html)
