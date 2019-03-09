@@ -29,8 +29,6 @@ del nat20s[1]
 
 #tbl = []
 for chk in nat20s:
-    if chk == 'Otyugh (2:17, 2:54:56) Tentacle against Beau':
-        chk = chk.replace('2:17', '2-17')
     ep = re.findall(r'2-\d{2}', chk)
     try:
         dat = {"roll": "nat20", "episode": ep[0], "details": chk}
@@ -40,6 +38,8 @@ for chk in nat20s:
     #tbl.append(dat)
 
 for chk in nat1s: 
+    if chk == 'Otyugh (2:17, 2:54:56) Tentacle against Beau':
+        chk = chk.replace('2:17', '2-17')
     ep = re.findall(r'2-\d{2}', chk)
     try:
         dat = {"roll": "nat1", "episode": ep[0], "details": chk}
