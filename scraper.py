@@ -4,9 +4,9 @@
 import scraperwiki
 from lxml import html
 import requests
-from lxml.html.soupparser import fromstring
-from lxml import etree
-from io import StringIO
+##from lxml.html.soupparser import fromstring
+##from lxml import etree
+##from io import StringIO
 import re
 
 
@@ -47,6 +47,7 @@ for chk in nat1s:
         dat = {"roll": "nat1", "episode": 'unknown', "details": chk}
     scraperwiki.sqlite.save(unique_keys=['details'], data = dat)
     # tbl.append(dat)
+
 
 
 #
