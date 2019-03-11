@@ -27,16 +27,17 @@ nat1s = tree.xpath('//td[2]/ol//span/text()')
 nat20s[0] += nat20s[1]
 del nat20s[1]
 
-#tbl = []
+pk = 1
 for chk in nat20s:
     ep = re.findall(r'2-\d{2}', chk)
     try:
-        dat = {"roll": "nat20", "episode": "'" + ep[0], "details": chk}
+        dat = {"roll": "nat20", "episode": "'" + ep[0], "details": chk, "pk": pk}
     except:
-        dat = {"roll": "nat20", "episode": "'" + ep, "details": chk}
-    scraperwiki.sqlite.save(unique_keys=['details'], data = dat)
-    #tbl.append(dat)
+        dat = {"roll": "nat20", "episode": "'" + ep, "details": chk, "pk": pk}
+    scraperwiki.sqlite.save(unique_keys=['pk'], data = dat)
+    pk += 1
 
+pk2 = 1
 for chk in nat1s: 
     if chk == 'Otyugh (2:17, 2:54:56) Tentacle against Beau':
         chk1 = chk.replace('2:17', '2-17')
@@ -45,11 +46,11 @@ for chk in nat1s:
         ep = re.findall(r'2-\d{2}', chk)
         
     try:
-        dat = {"roll": "nat1", "episode": "'" + ep[0], "details": chk}
+        dat = {"roll": "nat1", "episode": "'" + ep[0], "details": chk, "pk": pk2}
     except:
-        dat = {"roll": "nat1", "episode": 'unknown', "details": chk}
-    scraperwiki.sqlite.save(unique_keys=['details'], data = dat)
-    # tbl.append(dat)
+        dat = {"roll": "nat1", "episode": 'unknown', "details": chk, "pk": pk2}
+    scraperwiki.sqlite.save(unique_keys=['pk'], data = dat)
+    pk2 += 1
 
 
 
