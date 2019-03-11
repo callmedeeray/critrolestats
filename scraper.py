@@ -31,18 +31,21 @@ del nat20s[1]
 for chk in nat20s:
     ep = re.findall(r'2-\d{2}', chk)
     try:
-        dat = {"roll": "nat20", "episode": ep[0], "details": chk}
+        dat = {"roll": "nat20", "episode": "'" + ep[0], "details": chk}
     except:
-        dat = {"roll": "nat20", "episode": ep, "details": chk}
+        dat = {"roll": "nat20", "episode": "'" + ep, "details": chk}
     scraperwiki.sqlite.save(unique_keys=['details'], data = dat)
     #tbl.append(dat)
 
 for chk in nat1s: 
     if chk == 'Otyugh (2:17, 2:54:56) Tentacle against Beau':
-        chk = chk.replace('2:17', '2-17')
-    ep = re.findall(r'2-\d{2}', chk)
+        chk1 = chk.replace('2:17', '2-17')
+        ep = re.findall(r'2-\d{2}', chk1)
+    else:
+        ep = re.findall(r'2-\d{2}', chk)
+        
     try:
-        dat = {"roll": "nat1", "episode": ep[0], "details": chk}
+        dat = {"roll": "nat1", "episode": "'" + ep[0], "details": chk}
     except:
         dat = {"roll": "nat1", "episode": 'unknown', "details": chk}
     scraperwiki.sqlite.save(unique_keys=['details'], data = dat)
