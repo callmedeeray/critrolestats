@@ -37,7 +37,6 @@ for chk in nat20s:
     scraperwiki.sqlite.save(unique_keys=['pk'], data = dat)
     pk += 1
 
-pk2 = 1
 for chk in nat1s: 
     if chk == 'Otyugh (2:17, 2:54:56) Tentacle against Beau':
         chk1 = chk.replace('2:17', '2-17')
@@ -46,11 +45,11 @@ for chk in nat1s:
         ep = re.findall(r'2-\d{2}', chk)
         
     try:
-        dat = {"roll": "nat1", "episode": "'" + ep[0], "details": chk, "pk": pk2}
+        dat = {"roll": "nat1", "episode": "'" + ep[0], "details": chk, "pk": pk}
     except:
-        dat = {"roll": "nat1", "episode": 'unknown', "details": chk, "pk": pk2}
+        dat = {"roll": "nat1", "episode": 'unknown', "details": chk, "pk": pk}
     scraperwiki.sqlite.save(unique_keys=['pk'], data = dat)
-    pk2 += 1
+    pk += 1
 
 
 
