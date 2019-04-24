@@ -33,9 +33,10 @@ for chk in nat20s:
     try:
         dat = {"roll": "nat20", "episode": "'" + ep[0], "details": chk, "pk": pk}
     except:
-        dat = {"roll": "nat20", "episode": "'" + ep, "details": chk, "pk": pk}
+        dat = {"roll": "nat20", "episode": "'" + ep1[0], "details": chk, "pk": pk}
     scraperwiki.sqlite.save(unique_keys=['pk'], data = dat)
     pk += 1
+    ep1 = ep
 
 for chk in nat1s: 
     if chk == 'Otyugh (2:17, 2:54:56) Tentacle against Beau':
